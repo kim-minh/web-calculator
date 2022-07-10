@@ -18,6 +18,7 @@ body {
 }
 
 .calculator {
+    touch-action: manipulation;
     display: flex;
     flex-direction: column;
     border: 5px solid black;
@@ -35,7 +36,6 @@ body {
 }
 
 button {
-    touch-action: none;
     border: 1px solid black;    
     padding: 20px;
     font-size: 20px;
