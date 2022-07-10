@@ -66,3 +66,14 @@ clear.addEventListener('click', () => {
     num = '';
     calc = decimal = false;
 });
+
+const sign = document.querySelector('.sign');
+sign.addEventListener('click', () => {
+    if(num === '') return;
+    num = num > 0 ? `-${num}` : num.replace('-', '');
+    
+    if(!calc) num1 = num; //Check if num1 exist
+    else num2 = num; //else move to num2
+
+    display.textContent = num;
+});
