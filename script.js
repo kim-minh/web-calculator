@@ -7,7 +7,7 @@ const multiply = (a, b) => a * b;
 //Divide 2 numbers, return error if b equal 0
 const divide = (a, b) => {
     if(b == 0) return 'ERROR';
-    return a / b;
+    return +(a / b).toFixed(2);
 }
 
 //Calculate function
@@ -39,6 +39,7 @@ numbers.forEach(number => number.addEventListener('click', () => {
         if(!decimal) decimal = true;
         else return;
     }
+    if(num.length > 6) return;
     num += number.textContent; //Add additional digit to num
     updateDisplay();
 }));
@@ -51,10 +52,14 @@ operators.forEach(op => op.addEventListener('click', () => {
         operator = op.textContent;
     }
     else {
-        num1 = operate(num1, num2, operator); //Call the calculate function
+        let ans = operate(num1, num2, operator); //Call the calculate function
         operator = op.textContent; //Read the next operator
         if(operator === '=') calc = false; //If the operator was =, reset the script
-        display.textContent = num1;
+
+        if((ans + '').length > 7) display.textContent = ans.toExponential(1); //Display in scientific notation if length > 6
+        else display.textContent = ans; //Round to 2 decimal places
+        
+        num1 = ans;
     }
     decimal = false;
     num = '';
