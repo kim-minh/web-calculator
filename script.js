@@ -1,10 +1,16 @@
+//Add 2 numbers
 const add = (a, b) => +a + +b;
+//Subtract 2 numbers
 const substract = (a, b) => a - b;
+//Multiply 2 numbers
 const multiply = (a, b) => a * b;
+//Divide 2 numbers, return error if b equal 0
 const divide = (a, b) => {
     if(b == 0) return 'ERROR';
     return a / b;
 }
+
+//Calculate function
 const operate = (a, b, operator) => {
     switch(operator) {
         case '+': return add(a, b);
@@ -14,10 +20,12 @@ const operate = (a, b, operator) => {
     }
 };
 
-let num1, num2, num = '';
+
+let num1, num2; //Operands
+let num = ''; //Display number
 let operator;
-let calc = false;
-let decimal = false;
+let calc = false; //True if exist num1
+let decimal = false; //True if already exist a decimal point
 
 
 const display = document.querySelector('.display');
@@ -28,22 +36,24 @@ numbers.forEach(number => number.addEventListener('click', () => {
         if(!decimal) decimal = true;
         else return;
     }
-    num += number.textContent;
-    if(!calc) num1 = num;
-    else num2 = num;
+    num += number.textContent; //Add additional digit to num
+    if(!calc) num1 = num; //Check if num1 exist
+    else num2 = num; //else move to num2
+
     display.textContent = num;
 }));
 
 const operators = Array.from(document.querySelectorAll('.operator'));
 operators.forEach(op => op.addEventListener('click', () => {
+    //If num1 exist, store the variable and move to num2
     if(!calc) {
         calc = true;
         operator = op.textContent;
     }
     else {
-        num1 = operate(num1, num2, operator);
-        operator = op.textContent;
-        if(operator === '=') calc = false;
+        num1 = operate(num1, num2, operator); //Call the calculate function
+        operator = op.textContent; //Read the next operator
+        if(operator === '=') calc = false; //If the operator was =, reset the script
         display.textContent = num1;
     }
     decimal = false;
