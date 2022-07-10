@@ -14,7 +14,7 @@ const operate = (a, b, operator) => {
     }
 };
 
-let num1 = undefined, num2 = undefined, num = '';
+let num1, num2, num = '';
 let operator;
 let calc = false;
 let decimal = false;
@@ -53,7 +53,6 @@ operators.forEach(op => op.addEventListener('click', () => {
 const clear = document.querySelector('.clear');
 clear.addEventListener('click', () => {
     display.textContent = 0;
-    num1 = num2 = undefined;
     num = '';
     calc = decimal = false;
 });
