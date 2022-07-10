@@ -20,9 +20,7 @@ const operate = (a, b, operator) => {
     }
 };
 
-
-let num1, num2; //Operands
-let num = ''; //Display number
+let num1 = undefined, num2 = undefined, num = '';
 let operator;
 let calc = false; //True if exist num1
 let decimal = false; //True if already exist a decimal point
@@ -63,6 +61,7 @@ operators.forEach(op => op.addEventListener('click', () => {
 const clear = document.querySelector('.clear');
 clear.addEventListener('click', () => {
     display.textContent = 0;
+    num1 = num2 = undefined;
     num = '';
     calc = decimal = false;
 });
