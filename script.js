@@ -33,10 +33,15 @@ const operators = Array.from(document.querySelectorAll('.operator'));
 operators.forEach(op => op.addEventListener('click', () => {
     if(!calc) {
         calc = true;
-        num = '';
         operator = op.textContent;
     }
-    else display.textContent = operate(num1, num2, operator);
+    else {
+        num1 = operate(num1, num2, operator);
+        operator = op.textContent;
+        if(operator === '=') calc = false;
+        display.textContent = num1;
+    }
+    num = '';
 }));
 
 const clear = document.querySelector('.clear');
