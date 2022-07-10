@@ -35,6 +35,7 @@ const updateDisplay = () => {
 
 const numbers = Array.from(document.querySelectorAll('.operand'));
 numbers.forEach(number => number.addEventListener('click', () => {
+    clear.textContent = 'C';
     if(number.textContent === '.') {
         if(!decimal) decimal = true;
         else return;
@@ -51,27 +52,33 @@ operators.forEach(op => op.addEventListener('click', () => {
         calc = true;
         operator = op.textContent;
     }
-    else {
+    else if(num2 !== undefined) {
         let ans = operate(num1, num2, operator); //Call the calculate function
         operator = op.textContent; //Read the next operator
         if(operator === '=') calc = false; //If the operator was =, reset the script
 
         if((ans + '').length > 7) display.textContent = ans.toExponential(1); //Display in scientific notation if length > 6
         else display.textContent = ans; //Round to 2 decimal places
-        
+
         num1 = ans;
+        num2 = undefined;
     }
+    else operator = op.textContent;
     decimal = false;
     num = '';
 }));
 
 const clear = document.querySelector('.clear');
 clear.addEventListener('click', () => {
+    if(clear.textContent === 'AC') {
+        num1 = 0;
+        calc = false;
+    } 
+    else clear.textContent = 'AC';
     display.textContent = 0;
-    num1 = 0;
     num2 = undefined;
     num = '';
-    calc = decimal = false;
+    decimal = false;
 });
 
 const sign = document.querySelector('.sign');
