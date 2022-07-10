@@ -27,6 +27,11 @@ let decimal = false; //True if already exist a decimal point
 
 
 const display = document.querySelector('.display');
+const updateDisplay = () => {
+    if(!calc) num1 = num; //Check if num1 exist
+    else num2 = num; //else move to num2
+    display.textContent = num;
+}
 
 const numbers = Array.from(document.querySelectorAll('.operand'));
 numbers.forEach(number => number.addEventListener('click', () => {
@@ -35,10 +40,7 @@ numbers.forEach(number => number.addEventListener('click', () => {
         else return;
     }
     num += number.textContent; //Add additional digit to num
-    if(!calc) num1 = num; //Check if num1 exist
-    else num2 = num; //else move to num2
-
-    display.textContent = num;
+    updateDisplay();
 }));
 
 const operators = Array.from(document.querySelectorAll('.operator'));
@@ -71,9 +73,11 @@ const sign = document.querySelector('.sign');
 sign.addEventListener('click', () => {
     if(num === '') return;
     num = num > 0 ? `-${num}` : num.replace('-', '');
-    
-    if(!calc) num1 = num; //Check if num1 exist
-    else num2 = num; //else move to num2
+    updateDisplay();
+});
 
-    display.textContent = num;
+const percent = document.querySelector('.percent');
+percent.addEventListener('click', () => {
+    num /= 100;
+    updateDisplay();
 });
