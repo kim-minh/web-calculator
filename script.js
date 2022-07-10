@@ -17,12 +17,17 @@ const operate = (a, b, operator) => {
 let num1 = undefined, num2 = undefined, num = '';
 let operator;
 let calc = false;
+let decimal = false;
 
 
 const display = document.querySelector('.display');
 
 const numbers = Array.from(document.querySelectorAll('.operand'));
 numbers.forEach(number => number.addEventListener('click', () => {
+    if(number.textContent === '.') {
+        if(!decimal) decimal = true;
+        else return;
+    }
     num += number.textContent;
     if(!calc) num1 = num;
     else num2 = num;
@@ -41,6 +46,7 @@ operators.forEach(op => op.addEventListener('click', () => {
         if(operator === '=') calc = false;
         display.textContent = num1;
     }
+    decimal = false;
     num = '';
 }));
 
@@ -49,6 +55,5 @@ clear.addEventListener('click', () => {
     display.textContent = 0;
     num1 = num2 = undefined;
     num = '';
-    operator = '';
-    calc = false;
+    calc = decimal = false;
 });
