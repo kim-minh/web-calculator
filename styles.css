@@ -5,6 +5,7 @@
 }
 
 body {
+    touch-action: none;
     font-family: sans-serif;
     font-size: 60px;
     width: 100%;
@@ -18,7 +19,6 @@ body {
 }
 
 .calculator {
-    touch-action: manipulation;
     display: flex;
     flex-direction: column;
     border: 5px solid black;
